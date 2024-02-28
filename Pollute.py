@@ -69,7 +69,8 @@ rr_avg_prev = rr_prev.mean(axis=0)
 rr_avg_now = rr_now.mean(axis=0)
 
 
-st.markdown("<h3 style='text-align: center; color: orange;'> Pengaruh Hotspot di Puncak Musim El Nino Terhadap Generasi Masa Depan  <br><br></h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: orange;'> Pengaruh Hotspot Di Musim El Nino "
+            " <br> Terhadap Generasi Masa Depan Indonesia <br><br></h3>", unsafe_allow_html=True)
 
 #perbedaan tahun sebelumnya dan sekarang
 hs_diff = 100.0 * ((sumselhs - sumselhs_prev)/sumselhs_prev)
