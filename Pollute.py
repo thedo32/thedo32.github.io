@@ -7,12 +7,23 @@ import streamlit as st
 import altair as alt
 
 
-# import folium
-# from streamlit_folium import folium_static
+url = "https://ditppu.menlhk.go.id/portal/read/indeks-standar-pencemar-udara-ispu-sebagai-informasi-mutu-udara-ambien-di-indonesia"
+urllhk = "https://www.menlhk.go.id/"
+urlsipongi = "https://sipongi.menlhk.go.id/"
+urlfirms = "https://firms.modaps.eosdis.nasa.gov/api/country/"
+urlopenwea = "https://openweathermap.org/api/air-pollution"
+urlbmkg = "https://dataonline.bmkg.go.id/akses_data"
+urlboston = "https://www.bc.edu/bc-web/centers/schiller-institute/sites/masscleanair/articles/children.html"
+urlhalodoc = "https://www.halodoc.com/artikel/perlu-tahu-ini-7-gangguan-kesehatan-yang-dipicu-partikel-polusi-pm2-5"
+urlnafas = "https://nafas.co.id/article/Apakah-PM2-5-berbahaya-untuk-anak-anak"
+urlotc = "https://otcdigest.id/kesehatan-anak/polusi-udara-tingkatkan-risiko-adhd-pada-anak-anak"
+urlkompastv = "https://www.kompas.tv/regional/448420/akibat-karhutla-kabut-asap-di-palembang-makin-pekat"
+urlsctv = "https://www.liputan6.com/photo/read/5415505/diselimuti-kabut-asap-palembang-berlakukan-sekolah-daring?page=1"
+
+
 
 st.set_page_config(
-    page_title = "Polusi Udara dan Hotspot Kebakaran Lahan Hutan"
-     ,layout='wide'
+    page_title = "Polusi Udara dan Hotspot Kebakaran Lahan Hutan",layout="wide"
 )
 
 def format_big_number(num):
@@ -81,14 +92,27 @@ with st.container(border=True):
       st.metric("Presipitasi Rata2", value=format_big_number(rr_avg_now), delta=f'{rr_diff:.2f}%')
       st.write( "Unit Pengukuran: mm/hari")
 
+with st.container(border=True):
+     st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
+
 
 st.markdown("<br><h4 style='text-align: center; color: red;'>Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023</h4>", unsafe_allow_html=True)
 
 #tab untuk peta 3 wilayah administrasi
-tab1, tab2, tab3 = st.tabs(['Radius 75Km Palembang', 'Sumatera Selatan', 'Indonesia'])
+tab1, tab2, tab3 = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indonesia'])
+
 
 with tab1:
-    df1 = gpd.read_file('data/hotspot_plb_75.geojson')
+    sl1, sl2 = st.columns([1,5])
+    with sl1:
+        values = st.slider(
+            'Radius Sebaran Hotspot (Km)',value=50, min_value=25, max_value=75, step=25)
+    if values == 25:
+            df1 = gpd.read_file('data/hotspot_plb_25.geojson')
+    if values == 50:
+            df1 = gpd.read_file('data/hotspot_plb_50.geojson')
+    if values == 75:
+            df1 = gpd.read_file('data/hotspot_plb_75.geojson')
     # st.write(df2.head(5))
     df1['lon'] = df1.geometry.x  # extract longitude from geometry
     df1['lat'] = df1.geometry.y  # extract latitude from geometry
@@ -131,10 +155,6 @@ data = pd.pivot_table(
 ).reset_index()
 
 
-threshold1 = 51.0
-threshold2 = 101.0
-threshold3 = 201.0
-threshold4 = 301.0
 
 
 st.markdown("<br><h4 style='text-align: center; color: red;'>Tingkat ISPU PM 2.5 per Hari di Bulan Oktober 2023</h4>", unsafe_allow_html=True)
@@ -200,9 +220,13 @@ st.altair_chart(bars + highlight1 + highlight2 + highlight3 + rule1 + label1 +ru
 
 
 
+
 left_co, cent_co,last_co = st.columns([1,10,1])
 with cent_co:
-   st.image("data/kategori_ispu.png")
+    st.write("Kategori Indeks Standar Pencemar Udara (ISPU) PM 2.5 yang merupakan partikel"
+             "pencemar udara paling berpengaruh"
+             " bagi kesehatan manusia ada di tautan [DitppuLHK](%s)" % url)
+    st.image("data/kategori_ispu.png")
 
 
 #dataframe untuk korrelasi
@@ -290,20 +314,10 @@ with bright5_hs:
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
 
-url = "https://ditppu.menlhk.go.id/portal/read/indeks-standar-pencemar-udara-ispu-sebagai-informasi-mutu-udara-ambien-di-indonesia"
-urlfirms = "https://firms.modaps.eosdis.nasa.gov/api/country/"
-urlopenwea = "https://openweathermap.org/api/air-pollution"
-urlbmkg = "https://dataonline.bmkg.go.id/akses_data"
-urlboston = "https://www.bc.edu/bc-web/centers/schiller-institute/sites/masscleanair/articles/children.html"
-urlhalodoc = "https://www.halodoc.com/artikel/perlu-tahu-ini-7-gangguan-kesehatan-yang-dipicu-partikel-polusi-pm2-5"
-urlnafas = "https://nafas.co.id/article/Apakah-PM2-5-berbahaya-untuk-anak-anak"
-urlotc = "https://otcdigest.id/kesehatan-anak/polusi-udara-tingkatkan-risiko-adhd-pada-anak-anak"
-urlkompastv = "https://www.kompas.tv/regional/448420/akibat-karhutla-kabut-asap-di-palembang-makin-pekat"
-urlsctv = "https://www.liputan6.com/photo/read/5415505/diselimuti-kabut-asap-palembang-berlakukan-sekolah-daring?page=1"
 
 with st.container(border=True):
     st.markdown(
-        "<h5 style='text-align: center; color: red;'>Bagaimana Partikel Kecil Mengancam Generasi Masa Depan Indonesia:</h5>",
+        "<h4 style='text-align: center; color: red;'>Partikel Kecil Mengancam Generasi Masa Depan Indonesia</h4>",
         unsafe_allow_html=True)
     st.write("Particulate Matter (PM2.5) adalah partikel udara yang berukuran lebih kecil dari atau sama dengan 2.5 µm (mikrometer).\n"
              "PM2.5 berbahaya bagi orang-orang dari segala usia namun sangat berbahaya bagi anak-anak. \n"
@@ -313,15 +327,14 @@ with st.container(border=True):
              "dan gangguan pertumbuhan paru-paru. \n"
              "Paparan seorang ibu terhadap PM2.5 selama kehamilannya meningkatkan risiko kelahiran prematur, \n" 
              " berat badan lahir rendah, dan lahir mati.")
-    st.write("Sebagai informasi terkait parameter PM2,5 yang merupakan parameter "
-             "pencemar udara paling berpengaruh"
-             " terhadap kesehatan manusia - [KemenLHK](%s)" % url )
+
 
 with st.container(border=True):
     st.write("✨ Untuk Korrelasi, Data Jarak dan Kecerahan Hotspot maksimal dalam radius 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Curah Hujan, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
 with st.container(border=True):
-     st.markdown("* Sumber Data: [FIRMS NASA](%s)" % urlfirms + ", "
-             "[Air Polution Open Weather](%s)" % urlopenwea + ", "
+     st.markdown("* Sumber Data: [KemenLHK](%s)" % urllhk + ", "
+             "[FIRMS NASA](%s)" % urlfirms + ", "
+             "[Open Weather Map](%s)" % urlopenwea + ", "
              "[BMKG](%s)" % urlbmkg + ", "
              "[Boston College](%s)" % urlboston + ", "
              "[Nafas Indonesia](%s)" % urlnafas + ", "
