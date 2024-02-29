@@ -67,9 +67,8 @@ rr_avg_prev = rr_prev.mean(axis=0)
 rr_avg_now = rr_now.mean(axis=0)
 
 
-st.markdown("<h3 style='text-align: center; color: orange;'> Pengaruh Hotspot di Puncak Musim El Nino Pada Bulan "
-            + str(dt_now)[0:7] +" " +str(dt_now)[8:] +
-            " <br> Terhadap Generasi Masa Depan Di Kota Palembang <br><br></h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: orange;'> Pengaruh Hotspot Di Musim El Nino Pada Bulan "
+            " <br> Terhadap Generasi Masa Depan Indonesia <br><br></h3>", unsafe_allow_html=True)
 
 #perbedaan tahun sebelumnya dan sekarang
 hs_diff = 100.0 * ((sumselhs - sumselhs_prev)/sumselhs_prev)
@@ -266,7 +265,7 @@ with jarak_hs:
         st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
 
 with hujan_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Rata2 Curah Hujan (mm) dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
         scatter = alt.Chart(df2).mark_point().encode(
         x="mean(Curah_Hujan):Q",
         y="ISPU_PM_2_5:Q",
@@ -330,7 +329,7 @@ with st.container(border=True):
 
 
 with st.container(border=True):
-    st.write("✨ Untuk Korrelasi, Data Jarak dan Kecerahan Hotspot maksimal dalam radius 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Curah Hujan, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
+    st.write("✨ Untuk Korrelasi, Data Jarak dan Kecerahan Hotspot maksimal dalam radius 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Presipitasi, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
 with st.container(border=True):
      st.markdown("* Sumber Data: [KemenLHK](%s)" % urllhk + ", "
              "[FIRMS NASA](%s)" % urlfirms + ", "
