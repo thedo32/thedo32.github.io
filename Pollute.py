@@ -23,7 +23,9 @@ urlsctv = "https://www.liputan6.com/photo/read/5415505/diselimuti-kabut-asap-pal
 
 
 st.set_page_config(
-    page_title = "Polusi Udara dan Hotspot Kebakaran Lahan Hutan",layout="wide"
+    page_title = "Polusi Udara dan Hotspot Kebakaran Lahan Hutan",
+    page_icon="fishtail.png",
+    layout="wide"
 )
 
 def format_big_number(num):
@@ -224,7 +226,7 @@ left_co, cent_co,last_co = st.columns([1,8,1])
 with cent_co:
     st.write("Kategori ISPU PM 2.5 yang merupakan partikel"
              " pencemar udara paling berpengaruh"
-             " bagi kesehatan manusia, tautannya di [DitppuLHK](%s)" % url)
+             " bagi kesehatan - [DitppuLHK](%s)" % url)
     st.image("data/kategori_ispu.png")
 
 
