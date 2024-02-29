@@ -221,7 +221,7 @@ st.altair_chart(bars + highlight1 + highlight2 + highlight3 + rule1 + label1 +ru
 
 
 
-left_co, cent_co,last_co = st.columns([1,10,1])
+left_co, cent_co,last_co = st.columns([1,8,1])
 with cent_co:
     st.write("Kategori Indeks Standar Pencemar Udara (ISPU) PM 2.5 yang merupakan partikel"
              "pencemar udara paling berpengaruh"
