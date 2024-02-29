@@ -104,7 +104,7 @@ tab1, tab2, tab3 = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indo
 
 
 with tab1:
-    sl1, sl2 = st.columns([1,5])
+    sl1, sl2 = st.columns([1,4])
     with sl1:
         values = st.slider(
             'Radius Sebaran Hotspot (Km)',value=50, min_value=25, max_value=75, step=25)
@@ -222,11 +222,11 @@ st.altair_chart(bars + highlight1 + highlight2 + highlight3 + rule1 + label1 +ru
 
 
 
-left_co, cent_co,last_co = st.columns([1,8,1])
+left_co, cent_co,last_co = st.columns([1,10,1])
 with cent_co:
     st.write("Kategori ISPU PM 2.5 yang merupakan partikel"
              " pencemar udara paling berpengaruh"
-             " bagi kesehatan - [DitppuLHK](%s)" % url)
+             " bagi kesehatan manusia - [DitppuLHK](%s)" % url)
     st.image("data/kategori_ispu.png")
 
 
