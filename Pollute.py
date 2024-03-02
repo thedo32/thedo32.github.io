@@ -97,7 +97,8 @@ with st.container(border=True):
      st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
 
 
-st.markdown("<br><h4 style='text-align: center; color: red;'>Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023</h4>", unsafe_allow_html=True)
+st.markdown("<br><h4 style='text-align:"
+            " center; color: red;'>Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023</h4>", unsafe_allow_html=True)
 
 #tab untuk peta 3 wilayah administrasi
 tab1, tab2, tab3 = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indonesia'])
@@ -237,83 +238,109 @@ data = pd.pivot_table(
     data=df2,
     index=['Tanggal'.format(datetime)],
     aggfunc={
-        'ISPU_PM_2_5':pd.Series.nunique,
-        'PM2_5':pd.Series.nunique,
-        'PM10':pd.Series.nunique,
-        'tgl':pd.Series.unique,
-        'Jarak':'sum'.format(int),
-        'Kecerahan_Channel_4':'sum'.format(int),
-        'Kecerahan_Channel_5':'sum'.format(int),
-        'Temperatur':'sum'.format(int),
-        'Curah_Hujan':'sum'.format(int),
-        'Kecepatan_Angin':'sum'.format(int)
+        'ISPU_PM_2_5':'max',
+        'PM2_5':'max',
+        'PM10':'max',
+        'tgl':'count',
+        'Jarak':'mean',
+        'Kecerahan_Channel_4':'mean',
+        'Kecerahan_Channel_5':'mean',
+        'Temperatur':'mean',
+        'Curah_Hujan':'mean',
+        'Kecepatan_Angin':'mean'
     }
 ).reset_index()
 
 
-st.markdown("<br><h4 style='text-align: center; color: red;'>Korrelasi ✨ </h4>", unsafe_allow_html=True)
+st.markdown("<b><br><h4 style='text-align: center; color: red;'>Korrelasi ✨ </h4>", unsafe_allow_html=True)
+tab4, tab5 = st.tabs(['Korrelasi PM2.5', 'Korrelasi Hotspot'])
 
-#korrelasi per jarak, curah hujan, kecepatan angin
+#korrelasi pm2_5 dengan jarak, curah hujan, kecepatan angin
+with tab4:
+    jarak_hs, hujan_hs, angin_hs = st.columns(3)
 
-jarak_hs, hujan_hs, angin_hs = st.columns(3)
-
-with jarak_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Rata2 Jarak (km) Hotspot Dengan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
-        scatter2 = alt.Chart(df2).mark_point().encode(
-        x="mean(Jarak):Q",
+    with jarak_hs:
+        st.markdown("<h5 style='text-align: center; color: white;'>Jarak Hs rata2 (km) dan ISPU PM 2.5 Harian</h5>", unsafe_allow_html=True)
+        scatter2 = alt.Chart(data).mark_point().encode(
+        x="Jarak:Q",
         y="ISPU_PM_2_5:Q",
         )
 
         st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
 
-with hujan_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
+    with hujan_hs:
+        st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan ISPU PM 2.5 Harian</h5>", unsafe_allow_html=True)
         scatter = alt.Chart(df2).mark_point().encode(
-        x="mean(Curah_Hujan):Q",
+        x="Curah_Hujan:Q",
         y="ISPU_PM_2_5:Q",
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
 
-with angin_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Rata2 Kecepatan Angin (m/dtk) dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
+    with angin_hs:
+        st.markdown("<h5 style='text-align: center; color: white;'>Angin rata2 (m/dtk) dan ISPU PM 2.5 Harian</h5>", unsafe_allow_html=True)
         scatter = alt.Chart(df2).mark_point().encode(
-        x="mean(Kecepatan_Angin):Q",
+        x="Kecepatan_Angin:Q",
         y="ISPU_PM_2_5:Q",
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
 
 
-    #korrelasi dengan temperatur, curah hujan, kecepatan angin
-temp_hs, bright4_hs , bright5_hs = st.columns(3)
+    #korrelasi dengan pm2_5 dengan temperatur, kecerahan channel 4 dan 5
+    temp_hs, bright4_hs , bright5_hs = st.columns(3)
 
-with temp_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Rata2 Temperatur (Celcius) dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
-        scatter2 = alt.Chart(df2).mark_point().encode(
-            x="mean(Temperatur):Q",
+    with temp_hs:
+        st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan ISPU PM 2.5 Harian</h5>", unsafe_allow_html=True)
+        scatter2 = alt.Chart(data).mark_point().encode(
+            x="Temperatur:Q",
             y="ISPU_PM_2_5:Q",
         )
 
         st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
 
-with bright4_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Rata2 Kecerahan Hotspot Channel 4 (Kelvin)  dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
-        scatter = alt.Chart(df2).mark_point().encode(
-            x="mean(Kecerahan_Channel_4):Q",
+    with bright4_hs:
+        st.markdown("<h5 style='text-align: center; color: white;'>Hs Channel 4 rata2 (K)  dan ISPU PM 2.5 Harian</h5>", unsafe_allow_html=True)
+        scatter = alt.Chart(data).mark_point().encode(
+            x="Kecerahan_Channel_4:Q",
             y="ISPU_PM_2_5:Q",
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
 
-with bright5_hs:
-        st.markdown("<h5 style='text-align: center; color: white;'>Rata2 Kecerahan Hotspot Channel 5 (Kelvin) dan ISPU PM 2.5 per Hari</h5>", unsafe_allow_html=True)
-        scatter = alt.Chart(df2).mark_point().encode(
-            x="mean(Kecerahan_Channel_5):Q",
+    with bright5_hs:
+        st.markdown("<h5 style='text-align: center; color: white;'>Hs Channel 5 rata2 (K) dan ISPU PM 2.5 Harian</h5>", unsafe_allow_html=True)
+        scatter = alt.Chart(data).mark_point().encode(
+            x="Kecerahan_Channel_5:Q",
             y="ISPU_PM_2_5:Q",
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
+
+with tab5:
+  # korrelasi jumlah hotspot dengan curah hujan, temperatur
+
+  hujan_hss, temp_hss = st.columns(2)
+  with hujan_hss:
+        st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan Jumlah Hotspot per Hari</h5>", unsafe_allow_html=True)
+        scatter = alt.Chart(data).mark_point().encode(
+            x="Curah_Hujan:Q",
+            y="tg:Q",
+        )
+
+        st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
+
+  with temp_hss:
+        st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Jumlah Hotspot per Hari</h5>", unsafe_allow_html=True)
+        scatter2 = alt.Chart(data).mark_point().encode(
+            x="Temperatur:Q",
+            y="tgl:Q",
+        )
+
+        st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
+
+
+
 
 
 with st.container(border=True):
@@ -331,7 +358,7 @@ with st.container(border=True):
 
 
 with st.container(border=True):
-    st.write("✨ Untuk Korrelasi, Data Jarak dan Kecerahan Hotspot maksimal dalam radius 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Presipitasi, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
+    st.write("✨ Untuk Korrelasi, Data Jarak dan Kecerahan Hotspot dihitung dalam radius maksimal 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Presipitasi, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
 with st.container(border=True):
      st.markdown("* Sumber Data: [KemenLHK](%s)" % urllhk + ", "
              "[FIRMS NASA](%s)" % urlfirms + ", "
