@@ -1,4 +1,4 @@
-latitude,longitude,Kecerahan_Channel_4,Kecerahan_Channel_5,Jarak,tanggal_f,tgl,Tanggal,Kota,lat_pol,lon_pol,PM2_5,ISPU_PM_2_5,PM10,tanggal_a,Temperatur,Curah_Hujan,Kecepatan_Angin
+latitude,longitude,Kecerahan_Channel_4,Kecerahan_Channel_5,Jarak,tanggal_f,Hotspot_harian,Tanggal,Kota,lat_pol,lon_pol,PM2_5,ISPU_PM_2_5,PM10,tanggal_a,Temperatur,Curah_Hujan,Kecepatan_Angin
 -3.64937,104.68317,334.61,303.6,74.1,2023-10-01,2023-10-01,1,Palembang,-2.9831,104.7527,38.66,91.68,43.07,2023-10-01,29.2,0,2
 -3.60086,104.84597,332.61,306.01,69.1,2023-10-01,2023-10-01,1,Palembang,-2.9831,104.7527,38.66,91.68,43.07,2023-10-01,29.2,0,2
 -3.5939,104.64655,345.51,301.04,68.6,2023-10-01,2023-10-01,1,Palembang,-2.9831,104.7527,38.66,91.68,43.07,2023-10-01,29.2,0,2

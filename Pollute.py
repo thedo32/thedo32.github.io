@@ -241,7 +241,7 @@ data = pd.pivot_table(
         'ISPU_PM_2_5':'max',
         'PM2_5':'max',
         'PM10':'max',
-        'tgl':'count',
+        'Hotspot_harian':'count',
         'Jarak':'mean',
         'Kecerahan_Channel_4':'mean',
         'Kecerahan_Channel_5':'mean',
@@ -295,6 +295,7 @@ with tab4:
         scatter2 = alt.Chart(data).mark_point().encode(
             x="Temperatur:Q",
             y="ISPU_PM_2_5:Q",
+            color=alt.Color("Temperatur:Q", scale=alt.Scale(scheme='reds'), legend=alt.Legend(orient="bottom"))
         )
 
         st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
@@ -304,6 +305,7 @@ with tab4:
         scatter = alt.Chart(data).mark_point().encode(
             x="Kecerahan_Channel_4:Q",
             y="ISPU_PM_2_5:Q",
+            color=alt.Color("Kecerahan_Channel_4:Q", scale=alt.Scale(scheme='reds'), legend=alt.Legend(orient="bottom"))
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
@@ -313,6 +315,7 @@ with tab4:
         scatter = alt.Chart(data).mark_point().encode(
             x="Kecerahan_Channel_5:Q",
             y="ISPU_PM_2_5:Q",
+            color=alt.Color("Kecerahan_Channel_5:Q", scale=alt.Scale(scheme='reds'), legend=alt.Legend(orient="bottom"))
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
@@ -320,48 +323,59 @@ with tab4:
 with tab5:
   # korrelasi jumlah hotspot dengan curah hujan, temperatur
 
-  hujan_hss, temp_hss = st.columns(2)
+  hujan_hss, angin_hss = st.columns(2)
   with hujan_hss:
-        st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan Jumlah Hotspot per Hari</h5>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan Jumlah Hotspot Harian</h5>", unsafe_allow_html=True)
         scatter = alt.Chart(data).mark_point().encode(
             x="Curah_Hujan:Q",
-            y="tgl:Q",
+            y="Hotspot_harian:Q",
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
 
-  with temp_hss:
-        st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Jumlah Hotspot per Hari</h5>", unsafe_allow_html=True)
+  with angin_hss:
+        st.markdown("<h5 style='text-align: center; color: white;'>Kecepatan Angin rata2 (C) dan Jumlah Hotspot Harian</h5>", unsafe_allow_html=True)
         scatter2 = alt.Chart(data).mark_point().encode(
-            x="Temperatur:Q",
-            y="tgl:Q",
+            x="Kecepatan_Angin:Q",
+            y="Hotspot_harian:Q",
         )
 
         st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
 
-  bright4_hss, bright5_hss = st.columns(2)
+  temp_hss, bright4_hss, bright5_hss = st.columns(3)
+
+  with temp_hss:
+    st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Jumlah Hotspot Harian</h5>", unsafe_allow_html=True)
+    scatter2 = alt.Chart(data).mark_point().encode(
+            x="Temperatur:Q",
+            y="Hotspot_harian:Q",
+            color=alt.Color("Temperatur:Q", scale=alt.Scale(scheme='reds'), legend=alt.Legend(orient="bottom") )
+       )
+
+    st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
+
   with bright4_hss:
-      st.markdown(
-          "<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Hs Channel 4 (K) Hari</h5></h5>",
+    st.markdown(
+          "<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Hs Channel 4 (K) rata2 Harian</h5></h5>",
           unsafe_allow_html=True)
-      scatter = alt.Chart(data).mark_point().encode(
+    scatter = alt.Chart(data).mark_point().encode(
           x="Temperatur:Q",
           y="Kecerahan_Channel_4:Q",
+          color=alt.Color("Kecerahan_Channel_4:Q", scale=alt.Scale(scheme='reds'), legend=alt.Legend(orient="bottom") )
       )
 
-      st.altair_chart(scatter, theme='streamlit', use_container_width=True)
+    st.altair_chart(scatter, use_container_width=True)
 
   with bright5_hss:
-      st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Hs Channel 5 (K) Hari</h5>",
+    st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Hs Channel 5 rata2 (K) Harian</h5>",
                   unsafe_allow_html=True)
-      scatter2 = alt.Chart(data).mark_point().encode(
+    scatter2 = alt.Chart(data).mark_point().encode(
           x="Temperatur:Q",
           y="Kecerahan_Channel_5:Q",
+          color=alt.Color("Kecerahan_Channel_5:Q", scale=alt.Scale(scheme='reds'), legend=alt.Legend(orient="bottom") )
       )
 
-      st.altair_chart(scatter2, theme='streamlit', use_container_width=True)
-
-
+    st.altair_chart(scatter2, theme='streamlit', use_container_width=True)
 
 
 with st.container(border=True):
