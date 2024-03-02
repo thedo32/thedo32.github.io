@@ -339,6 +339,27 @@ with tab5:
 
         st.altair_chart(scatter2, theme='streamlit',  use_container_width=True)
 
+  bright4_hss, bright5_hss = st.columns(2)
+  with bright4_hss:
+      st.markdown(
+          "<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Hs Channel 4 (K) Hari</h5></h5>",
+          unsafe_allow_html=True)
+      scatter = alt.Chart(data).mark_point().encode(
+          x="Temperatur:Q",
+          y="Kecerahan_Channel_4:Q",
+      )
+
+      st.altair_chart(scatter, theme='streamlit', use_container_width=True)
+
+  with bright5_hss:
+      st.markdown("<h5 style='text-align: center; color: white;'>Temperatur rata2 (C) dan Hs Channel 5 (K) Hari</h5>",
+                  unsafe_allow_html=True)
+      scatter2 = alt.Chart(data).mark_point().encode(
+          x="Temperatur:Q",
+          y="Kecerahan_Channel_5:Q",
+      )
+
+      st.altair_chart(scatter2, theme='streamlit', use_container_width=True)
 
 
 
