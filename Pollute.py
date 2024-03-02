@@ -220,9 +220,6 @@ label2 = rule2.mark_text(
 
 st.altair_chart(bars + highlight1 + highlight2 + highlight3 + rule1 + label1 +rule2 + label2, use_container_width=True)
 
-
-
-
 left_co, cent_co,last_co = st.columns([1,10,1])
 with cent_co:
     st.write("Analisis ISPU difokuskan pada PM 2.5 yang merupakan partikel"
