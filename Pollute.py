@@ -70,8 +70,8 @@ rr_avg_now = rr_now.mean(axis=0)
 
 
 
-st.markdown("<h3 style='text-align: center; color: orange;'> Pengaruh Hotspot Di Musim El Nino"
-            " <br> Terhadap Generasi Masa Depan Indonesia <br><br></h3>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: orange;'> Pengaruh Hotspot Di Musim El Nino"
+            " <br> Terhadap Generasi Masa Depan Indonesia <br><br></h2>", unsafe_allow_html=True)
 
 #perbedaan tahun sebelumnya dan sekarang
 hs_diff = 100.0 * ((sumselhs - sumselhs_prev)/sumselhs_prev)
@@ -96,9 +96,23 @@ with st.container(border=True):
 
 left_cl, main_cl= st.columns([1,8])
 with left_cl:
-     st.markdown("<p style='text-align: left; color: orange;'>By: Jeffri Argon</p><br>",unsafe_allow_html=True)
-     st.image("data/free_palestine.png")
-     st.image("data/from_river.png")
+     with st.container(border=True):
+        st.markdown("<h5 style='text-align: left; color: orange;'>Section:</h5>", unsafe_allow_html=True)
+        st.markdown("""
+        - [Peta](#peta-sebaran-hotspot-kebakaran-hutan-lahan-bulan-oktober-2023)
+        - [Diagram](#diagram-tingkat-ispu-harian-pada-bulan-oktober-2023)
+        - [Korrelasi](#korrelasi)
+        - [Insight](#insight)
+        """, unsafe_allow_html=True)
+     st.markdown("<br>", unsafe_allow_html=True)
+     with st.container(border=True):
+        st.image("data/free_palestine.png")
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.image("data/from_river.png")
+     st.markdown("<br>", unsafe_allow_html=True)
+     with st.container(border=True):
+        st.markdown("<p style='text-align: left; color: orange;'>By: Jeffri Argon</p>", unsafe_allow_html=True)
+
 
      #css function for column
      # def local_css(file_name):
@@ -109,17 +123,19 @@ with left_cl:
 
 with main_cl:
     with st.container(border=True):
-        st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
-
-
-        st.markdown("<br><h4 style='text-align:"
-            " center; color: red;'>Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023</h4>", unsafe_allow_html=True)
+        with st.container(border=True):
+            st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.subheader('Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023')
+        # st.markdown("<br><h4 style='text-align:"
+        #     " center; color: red;'>Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023</h4>", unsafe_allow_html=True)
 
         #tab untuk peta 3 wilayah administrasi
         tab1, tab2, tab3 = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indonesia'])
 
 
         with tab1:
+
             sl1, sl2 = st.columns([1,4])
             with sl1:
                 values = st.slider(
@@ -171,10 +187,9 @@ with main_cl:
             }
         ).reset_index()
 
-
-
-
-        st.markdown("<br><h4 style='text-align: center; color: red;'>Tingkat ISPU PM 2.5 per Hari di Bulan Oktober 2023</h4>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.subheader("Diagram Tingkat ISPU Harian Pada Bulan Oktober 2023")
+        # st.markdown("<br><h4 style='text-align: center; color: red;'>Tingkat ISPU PM 2.5 per Hari di Bulan Oktober 2023</h4>", unsafe_allow_html=True)
 
         threshold1 = 51.0
         threshold2 = 101.0
@@ -237,7 +252,7 @@ with main_cl:
 
         left_co, cent_co,last_co = st.columns([1,10,1])
         with cent_co:
-            st.write("ISPU difokuskan pada PM 2.5 yang merupakan partikel"
+            st.write("✨ ISPU fokus pada PM 2.5 yang merupakan partikel"
              " pencemar udara paling berpengaruh"
              " bagi kesehatan - [DitppuLHK](%s)" % url)
             st.image("data/kategori_ispu.png")
@@ -263,8 +278,9 @@ with main_cl:
             }
         ).reset_index()
 
-
-        st.markdown("<b><br><h4 style='text-align: center; color: red;'>Korrelasi ✨ </h4>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.subheader("Korrelasi")
+        # st.markdown("<br><br><h4 style='text-align: center; color: red;'>Korrelasi ✨ </h4>", unsafe_allow_html=True)
         tab4, tab5 = st.tabs(['Korrelasi PM2.5', 'Korrelasi Hotspot'])
 
         #korrelasi pm2_5 dengan jarak, curah hujan, kecepatan angin
@@ -386,8 +402,8 @@ with main_cl:
 
                 st.altair_chart(scatter2, theme='streamlit', use_container_width=True)
 
-
 with st.container(border=True):
+    st.subheader("Insight")
     st.markdown(
             "<h4 style='text-align: center; color: red;'>Partikel Kecil Mengancam Generasi Masa Depan Indonesia</h4>",
             unsafe_allow_html=True)
@@ -399,10 +415,13 @@ with st.container(border=True):
              "dan gangguan pertumbuhan paru-paru. \n"
              "Paparan seorang ibu terhadap PM2.5 selama kehamilannya meningkatkan risiko kelahiran prematur, \n" 
              " berat badan lahir rendah, dan lahir mati.")
-
+    st.write("Mengingat kepentingan tersebut di atas maka perlu dilakukan antara lain: "
+             " - Langkah Pencegahan ini yang paling penting!: Menggunakan sumber daya  yang tersedia meng-edukasi masyarakat dan membuat payung-payung hukum yang lengkap dan detail yang untuk mencegah terjadinya kebakaran hutan lahan baik yang disengaja maupun tidak disengaja (99% disengajakan oleh manusia menurut BNPB). Kemudian belajar lagi dari propinsi tentangga untuk pencegahan kebakaran hutan lahan."
+             " - Langkah Kesiapsiagaan: Menyiapkan alat pelindung, pengobatan, pangan yang cukup. Juga menyiapkan kurikulum-kurikulum untuk belajar daring jika diperlukan ketika terjadi kekeringan dan diikuti bencana Karhutla lagi, untuk melindungi Generasi Masa Depan, juga penyiapan mitigasi dan evakuasi bencana yang diperlukan."
+             " - Langkah Kedaruratan dan Pemulihan: Mengerahkan sumber daya yang ada dalam hal pemadaman, pembuatan saluran-saluran air yang memadai, serta sarana dan prasarana lain yang mendukung kedaruratan dan pemulihan bencana.")
 
 with st.container(border=True):
-    st.write("✨ Untuk Korrelasi, Data Jarak dan Kecerahan Hotspot dihitung dalam radius maksimal 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Presipitasi, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
+    st.write("✨ Untuk Korrelasi: Data Jarak dan Kecerahan Hotspot dihitung dalam radius maksimal 75km Kota Palembang, menyesuaikan dengan Data Temperatur, Presipitasi, serta Kecepatan Angin, yang Stasiun dan Akurasi Pengukurannya Berada di Sekitar Kota Palembang")
 with st.container(border=True):
     st.markdown("* Sumber Data: [KemenLHK](%s)" % urllhk + ", "
              "[FIRMS NASA](%s)" % urlfirms + ", "
@@ -465,7 +484,7 @@ with main_cl:
                 initial_view_state=pdk.ViewState(
                     latitude=-3.1952,
                     longitude=117.6524,
-                    zoom=5,
+                    zoom=3.5,
                 ),
                 layers=[
                     pdk.Layer(
