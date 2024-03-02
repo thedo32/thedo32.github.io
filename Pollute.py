@@ -325,7 +325,7 @@ with tab5:
         st.markdown("<h5 style='text-align: center; color: white;'>Presipitasi rata2 (mm) dan Jumlah Hotspot per Hari</h5>", unsafe_allow_html=True)
         scatter = alt.Chart(data).mark_point().encode(
             x="Curah_Hujan:Q",
-            y="tg:Q",
+            y="tgl:Q",
         )
 
         st.altair_chart(scatter, theme='streamlit',  use_container_width=True)
