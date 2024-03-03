@@ -22,7 +22,7 @@ urlotc = "https://otcdigest.id/kesehatan-anak/polusi-udara-tingkatkan-risiko-adh
 urlkompastv = "https://www.kompas.tv/regional/448420/akibat-karhutla-kabut-asap-di-palembang-makin-pekat"
 urlsctv = "https://www.liputan6.com/photo/read/5415505/diselimuti-kabut-asap-palembang-berlakukan-sekolah-daring?page=1"
 urlbnpb = "https://bnpb.go.id/berita/99-penyebab-kebakaran-hutan-dan-lahan-adalah-ulah-manusia"
-
+urlbubble = "https://github.com/thedo32/hotspotplb/blob/master/data/idn.geojson"
 
 st.set_page_config(
     page_title = "Polusi Udara dan Hotspot Kebakaran Lahan Hutan",
@@ -526,19 +526,5 @@ with main_cl:
                 ],
             ))
         with tab3b:
-            # Plotting
-            df3 = gpd.read_file('data/idn.geojson')
-            fig = px.scatter_mapbox(df3,
-                        geojson=df3,
-                        lat='lat',
-                        lon='lon',
-                        color='diff_percentage',
-                        color_continuous_scale="Viridis",
-                        range_color=(-100, 100),
-                        mapbox_style="carto-positron",
-                        opacity=0.5,
-                        labels={'diff_percentage': 'Difference Percentage'},
-                        center={"lat": -2, "lon": 118},
-                        zoom=3.4)
-
-            st.plotly_chart(fig)
+           st.write("Sumber data peta: [Geojson](%s)" %urlbubble, unsafe_allow_html=True )
+           st.image("img/indonesia_bubble.png",use_column_width=True)
