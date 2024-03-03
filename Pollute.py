@@ -1,10 +1,11 @@
 from datetime import datetime
-
 import geopandas as gpd
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
+from streamlit_float import *
 import altair as alt
+
 
 
 url = "https://ditppu.menlhk.go.id/portal/read/indeks-standar-pencemar-udara-ispu-sebagai-informasi-mutu-udara-ambien-di-indonesia"
@@ -25,8 +26,9 @@ urlsctv = "https://www.liputan6.com/photo/read/5415505/diselimuti-kabut-asap-pal
 st.set_page_config(
     page_title = "Polusi Udara dan Hotspot Kebakaran Lahan Hutan",
     page_icon="fishtail.png",
-    layout="wide"
+    layout="wide",
 )
+float_init()
 
 def format_big_number(num):
     if num >= 1e6:
@@ -55,7 +57,6 @@ dt_prev = min(bmkg['date'])
 dt_now = max(bmkg['date'])
 
 
-
 #temperatur sebelumnya dan sekarang
 t_prev = bmkg['t_avg'][bmkg['date'] == dt_prev]
 t_now =  bmkg['t_avg'][bmkg['date'] == dt_now]
@@ -81,7 +82,6 @@ sumselhs_pct = round(100.0 * (sumselhs/firmhs),2)
 
 
 with st.container(border=True):
-
     col_hotspot, col_temp, col_presip = st.columns(3) #add three columns
 
     with col_hotspot:
@@ -98,11 +98,17 @@ with st.container(border=True):
 
 left_cl, main_cl= st.columns([1,8])
 with left_cl:
-
+     containup = st.container()
+     containup.float()
+     with containup:
+         st.markdown("""
+                 [Up🔝](#pendahuluan)
+                 """, unsafe_allow_html=True)
 
      with st.container(border=True):
         st.markdown("<h5 style='text-align: left; color: orange;'>Section:</h5>", unsafe_allow_html=True)
         st.markdown("""
+        - [Pendahuluan](#pendahuluan)
         - [Peta](#peta-sebaran-hotspot-kebakaran-hutan-lahan-bulan-oktober-2023)
         - [Diagram](#diagram-tingkat-ispu-harian-pada-bulan-oktober-2023)
         - [Korrelasi](#korrelasi)
@@ -129,6 +135,7 @@ with main_cl:
     with st.container(border=True):
         with st.container(border=True):
             st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
+
         st.markdown("<br>", unsafe_allow_html=True)
         st.subheader('Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023')
         # st.markdown("<br><h4 style='text-align:"
