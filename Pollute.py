@@ -71,8 +71,8 @@ rr_avg_now = rr_now.mean(axis=0)
 
 
 
-st.markdown("<h2 style='text-align: center; color: orange;'> Pengaruh Hotspot Di Musim El Nino"
-            " <br> Terhadap Generasi Masa Depan Indonesia <br><br></h2>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: orange;'> Pengaruh Hotspot Di Musim El Nino"
+            " <br> Terhadap Generasi Masa Depan Indonesia <br><br></h1>", unsafe_allow_html=True)
 
 #perbedaan tahun sebelumnya dan sekarang
 hs_diff = 100.0 * ((sumselhs - sumselhs_prev)/sumselhs_prev)
@@ -100,15 +100,11 @@ left_cl, main_cl= st.columns([1,8])
 with left_cl:
      containup = st.container()
      containup.float()
-     with containup:
-         st.markdown("""
-                 [Up🔝](#pendahuluan)
-                 """, unsafe_allow_html=True)
+     containup.markdown("[🆙UP🆙](#pendahuluan)", unsafe_allow_html=True)
 
      with st.container(border=True):
         st.markdown("<h5 style='text-align: left; color: orange;'>Section:</h5>", unsafe_allow_html=True)
         st.markdown("""
-        - [Pendahuluan](#pendahuluan)
         - [Peta](#peta-sebaran-hotspot-kebakaran-hutan-lahan-bulan-oktober-2023)
         - [Diagram](#diagram-tingkat-ispu-harian-pada-bulan-oktober-2023)
         - [Korrelasi](#korrelasi)
