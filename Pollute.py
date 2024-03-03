@@ -81,7 +81,6 @@ sumselhs_pct = round(100.0 * (sumselhs/firmhs),2)
 
 
 with st.container(border=True):
-    #css function for column
 
     col_hotspot, col_temp, col_presip = st.columns(3) #add three columns
 
@@ -99,6 +98,8 @@ with st.container(border=True):
 
 left_cl, main_cl= st.columns([1,8])
 with left_cl:
+
+
      with st.container(border=True):
         st.markdown("<h5 style='text-align: left; color: orange;'>Section:</h5>", unsafe_allow_html=True)
         st.markdown("""
