@@ -1,3 +1,0 @@
-div[data-testid="stHorizontalBlock"] > div:first-of-type {
-  background-color: lightgrey;
-}

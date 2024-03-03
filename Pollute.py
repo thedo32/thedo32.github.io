@@ -79,7 +79,10 @@ t_diff = 100.0 * ((t_avg_now - t_avg_prev)/t_avg_prev)
 rr_diff = 100.0 * ((rr_avg_now - rr_avg_prev)/t_avg_prev)
 sumselhs_pct = round(100.0 * (sumselhs/firmhs),2)
 
+
 with st.container(border=True):
+    #css function for column
+
     col_hotspot, col_temp, col_presip = st.columns(3) #add three columns
 
     with col_hotspot:
