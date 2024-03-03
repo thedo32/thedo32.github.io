@@ -6,6 +6,7 @@ import streamlit as st
 from streamlit_float import *
 import altair as alt
 import plotly.express as px
+import streamlit.components.v1 as components
 
 
 
@@ -104,7 +105,7 @@ with left_cl:
      containup.markdown("[🆙 UP 🆙](#pendahuluan)", unsafe_allow_html=True)
 
      with st.container(border=True):
-        st.markdown("<h5 style='text-align: left; color: orange;'>Section:</h5>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: left; color: #40A2E3;'>Section:</h5>", unsafe_allow_html=True)
         st.markdown("""
         - [Peta](#peta-sebaran-hotspot-kebakaran-hutan-lahan-bulan-oktober-2023)
         - [Diagram](#diagram-tingkat-ispu-harian-pada-bulan-oktober-2023)
@@ -513,7 +514,7 @@ with main_cl:
                 initial_view_state=pdk.ViewState(
                     latitude=-3.1952,
                     longitude=117.6524,
-                    zoom=3.5,
+                    zoom=3.9,
                 ),
                 layers=[
                     pdk.Layer(
