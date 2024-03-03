@@ -80,7 +80,7 @@ t_diff = 100.0 * ((t_avg_now - t_avg_prev)/t_avg_prev)
 rr_diff = 100.0 * ((rr_avg_now - rr_avg_prev)/t_avg_prev)
 sumselhs_pct = round(100.0 * (sumselhs/firmhs),2)
 
-
+st.subheader("Pendahuluan")
 with st.container(border=True):
     col_hotspot, col_temp, col_presip = st.columns(3) #add three columns
 
@@ -135,7 +135,6 @@ with main_cl:
     with st.container(border=True):
         with st.container(border=True):
             st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
-
         st.markdown("<br>", unsafe_allow_html=True)
         st.subheader('Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023')
         # st.markdown("<br><h4 style='text-align:"
