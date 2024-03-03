@@ -20,7 +20,7 @@ urlnafas = "https://nafas.co.id/article/Apakah-PM2-5-berbahaya-untuk-anak-anak"
 urlotc = "https://otcdigest.id/kesehatan-anak/polusi-udara-tingkatkan-risiko-adhd-pada-anak-anak"
 urlkompastv = "https://www.kompas.tv/regional/448420/akibat-karhutla-kabut-asap-di-palembang-makin-pekat"
 urlsctv = "https://www.liputan6.com/photo/read/5415505/diselimuti-kabut-asap-palembang-berlakukan-sekolah-daring?page=1"
-
+urlbnpb = "https://bnpb.go.id/berita/99-penyebab-kebakaran-hutan-dan-lahan-adalah-ulah-manusia"
 
 
 st.set_page_config(
@@ -112,9 +112,9 @@ with left_cl:
         """, unsafe_allow_html=True)
      st.markdown("<br>", unsafe_allow_html=True)
      with st.container(border=True):
-        st.image("data/free_palestine.png")
+        st.image("img/free_palestine.png")
         st.markdown("<br>", unsafe_allow_html=True)
-        st.image("data/from_river.png")
+        st.image("img/from_river.png")
      st.markdown("<br>", unsafe_allow_html=True)
      with st.container(border=True):
         st.markdown("<p style='text-align: left; color: orange;'>By: Jeffri Argon</p>", unsafe_allow_html=True)
@@ -131,10 +131,38 @@ with main_cl:
     with st.container(border=True):
         with st.container(border=True):
             st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
+            # expander for sipongi historical data
+            with st.expander("Data Matrix Hostspot Indonesia dari Situs Sipongi KLHK"):
+                colmat1, colmat2, colmat3 = st.columns(3)
+                with colmat1:
+                    st.image("img/hs_2018.png")
+                with colmat2:
+                    st.image("img/hs_2019.png")
+                with colmat3:
+                    st.image("img/hs_2020.png")
+                colmat4, colmat5, colmat6 = st.columns(3)
+                with colmat4:
+                    st.image("img/hs_2021.png")
+                with colmat5:
+                    st.image("img/hs_2022.png")
+                with colmat6:
+                    st.image("img/hs_2023.png")
+
+            #links sumber bacaan
+            st.markdown("* Sumber Bacaan: [BNPB](%s)" % urlbnpb + ", "
+                        "[Boston College](%s)" % urlboston + ", "
+                        "[Nafas Indonesia](%s)" % urlnafas + ", "
+                        "[OTC Digest](%s)" % urlotc + ", "                                                                                                                                                                                                                                                                       
+                        "[Halodoc](%s)" % urlhalodoc + ", "
+                        "[Kompas TV](%s)" % urlkompastv + ", "
+                        "[Liputan 6 SCTV](%s)" % urlsctv, unsafe_allow_html=True)
+
+
         st.markdown("<br>", unsafe_allow_html=True)
         st.subheader('Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023')
         # st.markdown("<br><h4 style='text-align:"
         #     " center; color: red;'>Peta Sebaran Hotspot Kebakaran Hutan Lahan Bulan Oktober 2023</h4>", unsafe_allow_html=True)
+
 
         #tab untuk peta 3 wilayah administrasi
         tab1, tab2, tab3 = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indonesia'])
@@ -261,7 +289,7 @@ with main_cl:
             st.write("✨ ISPU fokus pada PM 2.5 yang merupakan partikel"
              " pencemar paling berpengaruh"
              " bagi kesehatan - [DitppuLHK](%s)" % url)
-            st.image("data/kategori_ispu.png")
+            st.image("img/kategori_ispu.png")
 
 
         #dataframe untuk korrelasi
@@ -432,13 +460,7 @@ with st.container(border=True):
     st.markdown("* Sumber Data: [KemenLHK](%s)" % urllhk + ", "
              "[FIRMS NASA](%s)" % urlfirms + ", "
              "[Open Weather Map](%s)" % urlopenwea + ", "
-             "[BMKG](%s)" % urlbmkg + ", "
-             "[Boston College](%s)" % urlboston + ", "
-             "[Nafas Indonesia](%s)" % urlnafas + ", "
-             "[OTC Digest](%s)" % urlotc + ", "
-             "[Halodoc](%s)" % urlhalodoc + ", "
-             "[Kompas TV](%s)" % urlkompastv + ", "
-             "[Liputan 6 SCTV](%s)" % urlsctv, unsafe_allow_html=True)
+             "[BMKG](%s)" % urlbmkg, unsafe_allow_html=True)
 
 with main_cl:
 #tab lain utk peta diloading paling akhir
