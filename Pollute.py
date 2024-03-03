@@ -5,6 +5,7 @@ import pydeck as pdk
 import streamlit as st
 from streamlit_float import *
 import altair as alt
+import plotly.express as px
 
 
 
@@ -132,7 +133,7 @@ with main_cl:
         with st.container(border=True):
             st.write("Menurut data [SIPONGI KLHK](%s)" % urlsipongi + " dan [FIRMS NASA](%s)" % urlfirms + " pada bulan Oktober 2023, di wilayah Propinsi Sumatera Selatan yang mempunyai penduduk 8,6 juta jiwa (BPS 2022), dan mempunyai metropolitan yang berkembang yakni Patungraya Agung yang berpenduduk 2,6 juta jiwa (BPS 2020), khususnya Kota Palembang yang berpenduduk sekitar 1,7 juta jiwa (BPS 2022), terjadi puncak kejadian Bencana Kebakaran Hutan Lahan yang diperparah oleh fenomena El Nino. Kejadian ini mengakibatkan terpaparnya polusi kabut asap yang mempunyai risiko tinggi terhadap masyarakat, terutama pada kelompok rentan seperti anak-anak dan ibu hamil yang dapat mengancam Generasi Masa Depan Indonesia")
             # expander for sipongi historical data
-            with st.expander("Data Matrix Hostspot Indonesia dari Situs Sipongi KLHK"):
+            with st.expander("Data Matrix Hotspot Indonesia dari Situs Sipongi KLHK"):
                 colmat1, colmat2, colmat3 = st.columns(3)
                 with colmat1:
                     st.image("img/hs_2018.png")
@@ -165,7 +166,7 @@ with main_cl:
 
 
         #tab untuk peta 3 wilayah administrasi
-        tab1, tab2, tab3 = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indonesia'])
+        tab1, tab2, tab3a, tab3b = st.tabs(['Kota Palembang', 'Provinsi Sumatera Selatan', 'Indonesia', 'Indonesia Bubble'])
 
 
         with tab1:
@@ -495,7 +496,7 @@ with main_cl:
                 ],
             ))
 
-        with tab3:
+        with tab3a:
             df3 = gpd.read_file('data/idn.geojson')
             df3['lon'] = df3.geometry.x  # extract longitude from geometry
             df3['lat'] = df3.geometry.y  # extract latitude from geometry
@@ -524,3 +525,20 @@ with main_cl:
                     ),
                 ],
             ))
+        with tab3b:
+            # Plotting
+            df3 = gpd.read_file('data/idn.geojson')
+            fig = px.scatter_mapbox(df3,
+                        geojson=df3,
+                        lat='lat',
+                        lon='lon',
+                        color='diff_percentage',
+                        color_continuous_scale="Viridis",
+                        range_color=(-100, 100),
+                        mapbox_style="carto-positron",
+                        opacity=0.5,
+                        labels={'diff_percentage': 'Difference Percentage'},
+                        center={"lat": -2, "lon": 118},
+                        zoom=3.4)
+
+            st.plotly_chart(fig)
