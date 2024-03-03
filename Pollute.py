@@ -253,7 +253,7 @@ with main_cl:
         left_co, cent_co,last_co = st.columns([1,10,1])
         with cent_co:
             st.write("✨ ISPU fokus pada PM 2.5 yang merupakan partikel"
-             " pencemar udara paling berpengaruh"
+             " pencemar paling berpengaruh"
              " bagi kesehatan - [DitppuLHK](%s)" % url)
             st.image("data/kategori_ispu.png")
 
